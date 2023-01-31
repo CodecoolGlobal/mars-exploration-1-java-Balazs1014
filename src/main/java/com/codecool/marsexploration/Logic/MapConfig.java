@@ -14,4 +14,24 @@ public class MapConfig {
         this.noOfMtns = noOfMtns;
         this.noOfPits = noOfPits;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String getLogPath() {
+        return logPath;
+    }
+
+    public int getNoOfMtns() {
+        return noOfMtns;
+    }
+
+    public int getNoOfPits() {
+        return noOfPits;
+    }
 }
