@@ -5,7 +5,6 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Elements;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
