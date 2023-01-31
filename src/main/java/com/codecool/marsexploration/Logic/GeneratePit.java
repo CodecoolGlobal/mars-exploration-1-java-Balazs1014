@@ -8,16 +8,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class GenerateMtn implements GetUserInput, EmptyProvider, ShapeProvider {
+public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
 
-    int numberOfMountainGroups;
+    int numberOfPits;
 
-    public int getNumberOfMountainGroups() {
-        return numberOfMountainGroups;
+    public int getNumberOfPits() {
+        return numberOfPits;
     }
 
-    public GenerateMtn() {
-        this.numberOfMountainGroups = promptInput();
+    public GeneratePit() {
+        this.numberOfPits = promptInput();
     }
 
     @Override
@@ -25,11 +25,15 @@ public class GenerateMtn implements GetUserInput, EmptyProvider, ShapeProvider {
         return null;
     }
 
+    //  mountains (more than 1 mountain connected) shape size (int)
+    // base coordinate (Coordinate)
+
+
 
 
     @Override
     public int promptInput() {
-        System.out.println("How many mountains to generate?");
+        System.out.println("How many pits to generate?");
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
     }
@@ -38,5 +42,4 @@ public class GenerateMtn implements GetUserInput, EmptyProvider, ShapeProvider {
     public void createShape(int shapeSize, Coordinate base) {
 
     }
-
 }

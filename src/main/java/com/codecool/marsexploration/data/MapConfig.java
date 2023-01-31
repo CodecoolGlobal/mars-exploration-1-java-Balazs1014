@@ -1,16 +1,14 @@
-package com.codecool.marsexploration.Logic;
+package com.codecool.marsexploration.data;
 
 public class MapConfig {
     private final int height;
     private final int width;
-    private final String logPath;
     private final int noOfMtns;
     private final int noOfPits;
 
-    public MapConfig(int height, int width, String logPath, int noOfMtns, int noOfPits) {
+    public MapConfig(int height, int width, int noOfMtns, int noOfPits) {
         this.height = height;
         this.width = width;
-        this.logPath = logPath;
         this.noOfMtns = noOfMtns;
         this.noOfPits = noOfPits;
     }
@@ -24,7 +22,7 @@ public class MapConfig {
     }
 
     public String getLogPath() {
-        return logPath;
+        return Data.LOG_PATH;
     }
 
     public int getNoOfMtns() {

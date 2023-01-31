@@ -1,4 +1,4 @@
-package com.codecool.marsexploration.Logic;
+package com.codecool.marsexploration.data;
 
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Elements;
