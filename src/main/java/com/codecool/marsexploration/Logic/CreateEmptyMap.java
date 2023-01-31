@@ -6,9 +6,20 @@ import com.codecool.marsexploration.data.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmptyProviderImpl implements EmptyProvider{
+public class CreateEmptyMap {
+
+    protected Map map;
+
+    public CreateEmptyMap(Map map) {
+        this.map = map;
+    }
+
 
     public List<Coordinate> getEmptyCoord(Coordinate base) {
+        return null;
+    }
+
+    /*public List<Coordinate> getEmptyCoord(Coordinate base) {
         List<Coordinate> emptyShape = new ArrayList<>();
         int basex = base.x();
         int basey = base.y();
@@ -22,5 +33,5 @@ public class EmptyProviderImpl implements EmptyProvider{
             }
         }
         return emptyShape;
-    }
+    }*/
 }
