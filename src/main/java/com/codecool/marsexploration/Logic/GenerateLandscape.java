@@ -5,6 +5,7 @@ import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class GenerateLandscape implements EmptyProvider {
     ElementType type;
 List<Coordinate> result;
 
-    public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
+   public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
         this.mapconfig = mapconfig;
         this.map = map;
         this.type = type;
@@ -38,7 +39,7 @@ List<Coordinate> result;
         return result;
     }
 
-    private int MtnSizeRNG() {
+    private int randomSizeGenerator() {
         Random rand = new Random();
         return rand.nextInt(5, 20);
     }
@@ -50,23 +51,23 @@ List<Coordinate> result;
     }
 
     //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
-    private Coordinate createMTN(List<Coordinate> emptyCoords) {
+    private Coordinate createTerrain(List<Coordinate> emptyCoords) {
         Random random = new Random();
         int randNumber = random.nextInt(emptyCoords.size());
-       /* int randomX= random.nextInt(emptyCoords.size());
-        int randomY = random.nextInt(emptyCoords.size()) ; */
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
         return first;
     }
     // 4ez meg berobbantja
-    public void initGenerateMTN() {
-        int MTNsize = MtnSizeRNG();
+    public void generateFullTerrain() {
+        int MTNsize = randomSizeGenerator();
         int counter = 0;
         Coordinate base = baseRNG();
         while (counter < MTNsize) {
             counter++;
-            base = createMTN(getEmptyCoords(base));
+            base = createTerrain(getEmptyCoords(base));
         }
     }
+
+
 }
