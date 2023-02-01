@@ -1,63 +1,60 @@
 package com.codecool.marsexploration.Logic;
-
-import com.codecool.marsexploration.Ui.GetUserInput;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Elements;
 import com.codecool.marsexploration.data.Map;
+import com.codecool.marsexploration.data.MapConfig;
 
 import java.util.*;
 
-public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
+public class GeneratePit implements EmptyProvider {
 
-    int numberOfPits;
-    private Map baseMap;
+    MapConfig mapconfig;
+    Map map;
 
-
-    public int getNumberOfPits() {
-        return numberOfPits;
+    public GenerateMtn(MapConfig mapconfig, Map map) {
+        this.mapconfig = mapconfig;
+        this.map = map;
     }
-
-    public GeneratePit() {
-        this.numberOfPits = promptInput();
-    }
-
+    //2kezdő pont körül kellenek az üres helyek
     @Override
-    public LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base /*ez amugy sztem lehet h index.*/) {
-        LinkedHashMap<Coordinate, Elements> gameMap = baseMap.getMap();
-        LinkedHashMap<Coordinate, Elements> emptyShape = new LinkedHashMap<>();
-        List<Coordinate> coordinates = (List<Coordinate>) gameMap.keySet();
-        for (int i = 0; i < gameMap.size(); i++) {
-            if (Objects.equals(gameMap.get(i), Elements.EMPTY)) {
-                emptyShape.put(coordinates.get(i), gameMap.get(i));
+    public List<Coordinate> getEmptyCoords(Coordinate base) {
+        List<Coordinate> result = new ArrayList<>();
+        for (int x = base.x() - 1; x < base.x() + 1; x++) {
+            for (int y = base.y() - 1; y < base.x() + 1; y++) {
+                Coordinate temp = new Coordinate(x, y);
+                if (map.getMapCoordinate(temp) == Elements.EMPTY) {
+                    result.add(temp);
+                }
             }
         }
-        return emptyShape;
+        return result;
     }
 
-    //  mountains (more than 1 mountain connected) shape size (int)
-    // base coordinate (Coordinate)
-
-
-    @Override
-    public int promptInput() {
-        System.out.println("How many pits to generate?");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+    private int MtnSizeRNG() {
+        Random rand = new Random();
+        return rand.nextInt(5, 20);
     }
 
-    @Override
-    public void createShape(int shapeSize, Coordinate base) {
-        LinkedHashMap<Coordinate,Elements> emptyCoords = getEmptyCoords(base);
-        Random random = new Random();
-        int randIndex;
-        List<Coordinate> coordinates = (List<Coordinate>) baseMap.getMap().keySet();
+    //1kezdő pointot megadni
+    private Coordinate baseRNG() {
+        Random rand = new Random();
+        return new Coordinate(rand.nextInt(mapconfig.getHeight()), rand.nextInt(mapconfig.getWidth()));
+    }
 
-        for (int i = 0; i < shapeSize; i++) {
-            randIndex = random.nextInt(emptyCoords.size());
-            Coordinate coordinate = coordinates.get(randIndex);
-            if(emptyCoords.get(coordinate).equals(Elements.EMPTY)){
-                emptyCoords.replace(coordinate,Elements.EMPTY,Elements.PIT);
-            }
+    //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
+    private Coordinate createMTN(List<Coordinate> emptyCoords) {
+        Coordinate first = emptyCoords.get(0);
+        map.setCoordinateElement(first, Elements.PIT);
+        return first;
+    }
+    // 4ez meg berobbantja
+    public void initGenerateMTN() {
+        int MTNsize = MtnSizeRNG();
+        int counter = 0;
+        Coordinate base = baseRNG();
+        while (counter != MTNsize) {
+            counter++;
+            base = createMTN(getEmptyCoords(base));
         }
     }
 }
