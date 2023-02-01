@@ -3,7 +3,11 @@ package com.codecool.marsexploration.Logic;
 import java.util.Random;
 
 public class DinamicNaming {
-    private String fileName = "our_map";
+    public DinamicNaming(String fileName) {
+        this.fileName = fileName;
+    }
+
+    private String fileName;
     private int filenamenumber = 0;
     String generatedName;
     public String generateName(){
@@ -11,8 +15,9 @@ public class DinamicNaming {
             generatedName = fileName + i;
         }*/
        // Random random = new Random();
-        generatedName = fileName ;
-        return generatedName + filenamenumber++;
+         filenamenumber++;
+        generatedName = fileName+ filenamenumber ;
+        return generatedName;
     }
 
 
