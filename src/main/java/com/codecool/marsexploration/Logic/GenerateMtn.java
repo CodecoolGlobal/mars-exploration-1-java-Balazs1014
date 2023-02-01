@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class GenerateMtn implements EmptyProvider, ShapeProvider {
+public class GenerateMtn implements EmptyProvider {
     MapConfig mapconfig;
     Map map;
 
