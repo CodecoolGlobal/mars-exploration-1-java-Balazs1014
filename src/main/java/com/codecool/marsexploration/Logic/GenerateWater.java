@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GenerateLandscape implements EmptyProvider {
+public class GenerateWater implements EmptyProvider{
     MapConfig mapconfig;
     Map map;
 
     ElementType type;
     List<Coordinate> result;
 
-    public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
+    public GenerateWater(MapConfig mapconfig, Map map, ElementType type) {
         this.mapconfig = mapconfig;
         this.map = map;
         this.type = type;
