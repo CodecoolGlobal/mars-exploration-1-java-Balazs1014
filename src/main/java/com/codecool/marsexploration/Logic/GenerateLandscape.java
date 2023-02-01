@@ -38,7 +38,7 @@ List<Coordinate> result;
         return result;
     }
 
-    private int MtnSizeRNG() {
+    private int randomSizeGenerator() {
         Random rand = new Random();
         return rand.nextInt(5, 20);
     }
@@ -50,7 +50,7 @@ List<Coordinate> result;
     }
 
     //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
-    private Coordinate createMTN(List<Coordinate> emptyCoords) {
+    private Coordinate createTerrain(List<Coordinate> emptyCoords) {
         Random random = new Random();
         int randNumber = random.nextInt(emptyCoords.size());
        /* int randomX= random.nextInt(emptyCoords.size());
@@ -60,13 +60,13 @@ List<Coordinate> result;
         return first;
     }
     // 4ez meg berobbantja
-    public void initGenerateMTN() {
-        int MTNsize = MtnSizeRNG();
+    public void generateFullTerrain() {
+        int shapeSize = randomSizeGenerator();
         int counter = 0;
         Coordinate base = baseRNG();
-        while (counter < MTNsize) {
+        while (counter < shapeSize) {
             counter++;
-            base = createMTN(getEmptyCoords(base));
+            base = createTerrain(getEmptyCoords(base));
         }
     }
 }
