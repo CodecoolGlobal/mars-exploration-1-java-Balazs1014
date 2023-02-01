@@ -3,40 +3,62 @@ package com.codecool.marsexploration.Logic;
 import com.codecool.marsexploration.Ui.GetUserInput;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Elements;
+import com.codecool.marsexploration.data.Map;
+import com.codecool.marsexploration.data.MapConfig;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Random;
 
-public class GenerateMtn implements GetUserInput, EmptyProvider, ShapeProvider {
 
-    int numberOfMountainGroups;
+public class GenerateMtn implements EmptyProvider, ShapeProvider {
+    MapConfig mapconfig;
+    Map map;
 
-    public int getNumberOfMountainGroups() {
-        return numberOfMountainGroups;
+    public GenerateMtn(MapConfig mapconfig, Map map) {
+        this.mapconfig = mapconfig;
+        this.map = map;
     }
-
-    public GenerateMtn() {
-        this.numberOfMountainGroups = promptInput();
-    }
-
+    //2kezdő pont körül kellenek az üres helyek
     @Override
-    public LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base) {
-        return null;
+    public List<Coordinate> getEmptyCoords(Coordinate base) {
+        List<Coordinate> result = new ArrayList<>();
+        for (int x = base.x() - 1; x < base.x() + 1; x++) {
+            for (int y = base.y() - 1; y < base.x() + 1; y++) {
+                Coordinate temp = new Coordinate(x, y);
+                if (map.getMapCoordinate(temp) == Elements.EMPTY) {
+                    result.add(temp);
+                }
+            }
+        }
+        return result;
     }
 
-
-
-    @Override
-    public int promptInput() {
-        System.out.println("How many mountains to generate?");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+    private int MtnSizeRNG() {
+        Random rand = new Random();
+        return rand.nextInt(5, 20);
     }
 
-    @Override
-    public void createShape(int shapeSize, Coordinate base) {
-
+    //1kezdő pointot megadni
+    private Coordinate baseRNG() {
+        Random rand = new Random();
+        return new Coordinate(rand.nextInt(mapconfig.getHeight()), rand.nextInt(mapconfig.getWidth()));
     }
 
+    //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
+    private Coordinate createMTN(List<Coordinate> emptyCoords) {
+        Coordinate first = emptyCoords.get(0);
+        map.setCoordinateElement(first, Elements.MOUNTAIN);
+        return first;
+    }
+    // 4ez meg berobbantja
+    public void initGenerateMTN() {
+        int MTNsize = MtnSizeRNG();
+        int counter = 0;
+        Coordinate base = baseRNG();
+        while (counter != MTNsize) {
+            counter++;
+            base = createMTN(getEmptyCoords(base));
+        }
+    }
 }

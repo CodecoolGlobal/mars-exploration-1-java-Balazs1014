@@ -1,6 +1,10 @@
 package com.codecool.marsexploration.data;
 
-public class MapConfig {
+import com.codecool.marsexploration.Ui.GetUserInput;
+
+import java.util.Scanner;
+
+public class MapConfig implements GetUserInput {
     private final int height;
     private final int width;
     private final int noOfMtns;
@@ -31,5 +35,12 @@ public class MapConfig {
 
     public int getNoOfPits() {
         return noOfPits;
+    }
+
+    @Override
+    public int promptInput() {
+        System.out.println("How many mountains to generate?");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
     }
 }

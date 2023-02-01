@@ -10,7 +10,7 @@ import java.util.List;
 public class Pit implements EmptyProvider, ShapeProvider {
 
     @Override
-    public LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base) {
+    public List<Coordinate> getEmptyCoords(Coordinate base) {
         /*
         List<Coordinate> emptyCoords = new ArrayList<>();
         Coordinate left = new Coordinate(base.x() - 1, base.y());

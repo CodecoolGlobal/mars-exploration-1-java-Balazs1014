@@ -7,6 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface EmptyProvider {
-    LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base);
+    List<Coordinate> getEmptyCoords(Coordinate base);
 
 }

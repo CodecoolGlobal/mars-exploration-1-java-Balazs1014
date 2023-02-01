@@ -5,6 +5,7 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Elements;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
@@ -20,7 +21,7 @@ public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
     }
 
     @Override
-    public LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base) {
+    public List<Coordinate> getEmptyCoords(Coordinate base) {
         return null;
     }
 
