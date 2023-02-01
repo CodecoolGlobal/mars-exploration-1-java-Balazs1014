@@ -16,7 +16,7 @@ public class GeneratePit implements EmptyProvider {
     MapConfig mapconfig;
     Map map;
 
-    public GenerateMtn(MapConfig mapconfig, Map map) {
+    public GeneratePit(MapConfig mapconfig, Map map) {
         this.mapconfig = mapconfig;
         this.map = map;
     }
