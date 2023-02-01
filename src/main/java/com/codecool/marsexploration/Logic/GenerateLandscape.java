@@ -60,10 +60,12 @@ List<Coordinate> result;
     }
     // 4ez meg berobbantja
     public void generateFullTerrain() {
+
         int MTNsize = randomSizeGenerator();
+
         int counter = 0;
         Coordinate base = baseRNG();
-        while (counter < MTNsize) {
+        while (counter < shapeSize) {
             counter++;
             base = createTerrain(getEmptyCoords(base));
         }
