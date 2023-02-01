@@ -5,6 +5,7 @@ import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class GenerateLandscape implements EmptyProvider {
     ElementType type;
 List<Coordinate> result;
 
-    public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
+   public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
         this.mapconfig = mapconfig;
         this.map = map;
         this.type = type;
@@ -53,15 +54,15 @@ List<Coordinate> result;
     private Coordinate createTerrain(List<Coordinate> emptyCoords) {
         Random random = new Random();
         int randNumber = random.nextInt(emptyCoords.size());
-       /* int randomX= random.nextInt(emptyCoords.size());
-        int randomY = random.nextInt(emptyCoords.size()) ; */
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
         return first;
     }
     // 4ez meg berobbantja
     public void generateFullTerrain() {
-        int shapeSize = randomSizeGenerator();
+
+        int MTNsize = randomSizeGenerator();
+
         int counter = 0;
         Coordinate base = baseRNG();
         while (counter < shapeSize) {
@@ -69,4 +70,6 @@ List<Coordinate> result;
             base = createTerrain(getEmptyCoords(base));
         }
     }
+
+
 }
