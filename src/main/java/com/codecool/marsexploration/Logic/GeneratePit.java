@@ -10,7 +10,8 @@ import java.util.*;
 public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
 
     int numberOfPits;
-    private Map baseMapMap;
+    private Map baseMap;
+
 
     public int getNumberOfPits() {
         return numberOfPits;
@@ -22,22 +23,15 @@ public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
 
     @Override
     public LinkedHashMap<Coordinate, Elements> getEmptyCoords(Coordinate base /*ez amugy sztem lehet h index.*/) {
-        int basex = base.x();
-        int basey = base.y();
-        var originalMap = baseMapMap.getMap();
-       LinkedHashMap<Coordinate,Elements> emptyShape = new LinkedHashMap<>();
-        for(int i =0; i< originalMap.size(); i++){
-            //basex ++;
-           if(!Objects.equals(originalMap.get(base) , Elements.EMPTY)){
-              originalMap.remove();
-             // emptyShape.put(originalMap.keySet().stream().reduce();
-           }
+        LinkedHashMap<Coordinate, Elements> gameMap = baseMap.getMap();
+        LinkedHashMap<Coordinate, Elements> emptyShape = new LinkedHashMap<>();
+        List<Coordinate> coordinates = (List<Coordinate>) gameMap.keySet();
+        for (int i = 0; i < gameMap.size(); i++) {
+            if (Objects.equals(gameMap.get(i), Elements.EMPTY)) {
+                emptyShape.put(coordinates.get(i), gameMap.get(i));
+            }
         }
-
-        /*LinkedHashMap<Coordinate,Elements> emptyShape = new LinkedHashMap<>();
-
-        for (base.)*/
-        return null;
+        return emptyShape;
     }
 
     //  mountains (more than 1 mountain connected) shape size (int)
@@ -53,6 +47,17 @@ public class GeneratePit implements GetUserInput, EmptyProvider, ShapeProvider {
 
     @Override
     public void createShape(int shapeSize, Coordinate base) {
+        LinkedHashMap<Coordinate,Elements> emptyCoords = getEmptyCoords(base);
+        Random random = new Random();
+        int randIndex;
+        List<Coordinate> coordinates = (List<Coordinate>) baseMap.getMap().keySet();
 
+        for (int i = 0; i < shapeSize; i++) {
+            randIndex = random.nextInt(emptyCoords.size());
+            Coordinate coordinate = coordinates.get(randIndex);
+            if(emptyCoords.get(coordinate).equals(Elements.EMPTY)){
+                emptyCoords.replace(coordinate,Elements.EMPTY,Elements.PIT);
+            }
+        }
     }
 }
