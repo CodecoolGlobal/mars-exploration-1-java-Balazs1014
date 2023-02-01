@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 
 public class Map {
     private final MapConfig config;
-    private final LinkedHashMap <Coordinate, Elements> map = new LinkedHashMap<>();
+    private  LinkedHashMap <Coordinate, Elements> map = new LinkedHashMap<>();
 
     public Map(MapConfig config) {
         this.config = config;

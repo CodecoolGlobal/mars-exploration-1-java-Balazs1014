@@ -6,12 +6,14 @@ import com.codecool.marsexploration.data.Elements;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
+import java.util.*;
+
+
 
 
 public class GenerateMtn implements EmptyProvider {
+
     MapConfig mapconfig;
     Map map;
 
