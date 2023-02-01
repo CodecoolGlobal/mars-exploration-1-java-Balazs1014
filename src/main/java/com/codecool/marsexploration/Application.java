@@ -1,5 +1,7 @@
 package com.codecool.marsexploration;
 
+import com.codecool.marsexploration.data.Data;
+
 import java.util.Random;
 
 public class Application {

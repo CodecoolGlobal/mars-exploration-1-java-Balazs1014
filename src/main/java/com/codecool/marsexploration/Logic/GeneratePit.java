@@ -4,7 +4,12 @@ import com.codecool.marsexploration.data.Elements;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
+
 import java.util.*;
+
+
+
+
 
 public class GeneratePit implements EmptyProvider {
 
@@ -18,6 +23,7 @@ public class GeneratePit implements EmptyProvider {
     //2kezdő pont körül kellenek az üres helyek
     @Override
     public List<Coordinate> getEmptyCoords(Coordinate base) {
+
         List<Coordinate> result = new ArrayList<>();
         for (int x = base.x() - 1; x < base.x() + 1; x++) {
             for (int y = base.y() - 1; y < base.x() + 1; y++) {
@@ -28,6 +34,8 @@ public class GeneratePit implements EmptyProvider {
             }
         }
         return result;
+
+        
     }
 
     private int MtnSizeRNG() {

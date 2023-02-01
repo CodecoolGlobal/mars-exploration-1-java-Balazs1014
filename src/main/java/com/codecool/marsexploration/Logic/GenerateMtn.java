@@ -6,7 +6,11 @@ import com.codecool.marsexploration.data.Elements;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
+
 import java.util.*;
+
+
+
 
 public class GenerateMtn implements EmptyProvider {
 
