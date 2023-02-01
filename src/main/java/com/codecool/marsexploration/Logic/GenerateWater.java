@@ -5,6 +5,7 @@ import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
+
 import java.util.*;
 
 public class GenerateWater {
@@ -23,10 +24,12 @@ public class GenerateWater {
 
     public Coordinate getOneEmptyCoordinate(Coordinate base) {
 
+
         for (int x = base.x() - 1; x < base.x() + 1; x++) {
             for (int y = base.y() - 1; y < base.y() + 1; y++) {
                 Coordinate temp = new Coordinate(x, y);
                 if (map.getMapCoordinate(temp) == ElementType.EMPTY) {
+
                     return temp;
                 }
             }
@@ -71,5 +74,6 @@ public class GenerateWater {
             createWater(valid);
         }
     }
+
 
 }

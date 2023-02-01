@@ -15,7 +15,7 @@ public class GenerateLandscape implements EmptyProvider {
     Map map;
 
     ElementType type;
-List<Coordinate> result;
+    List<Coordinate> result;
 
    public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
         this.mapconfig = mapconfig;
@@ -24,7 +24,7 @@ List<Coordinate> result;
         this.result = new ArrayList<>();
 
     }
-    //2kezdő pont körül kellenek az üres helyek
+
     @Override
     public List<Coordinate> getEmptyCoords(Coordinate base) {
 
@@ -44,24 +44,31 @@ List<Coordinate> result;
         return rand.nextInt(5, 20);
     }
 
-    //1kezdő pointot megadni
     private Coordinate baseRNG() {
         Random rand = new Random();
         return new Coordinate(rand.nextInt(mapconfig.getHeight()), rand.nextInt(mapconfig.getWidth()));
     }
 
+
     //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
     private Coordinate createTerrain(List<Coordinate> emptyCoords) {
+
         Random random = new Random();
         int randNumber = random.nextInt(emptyCoords.size());
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
         return first;
     }
+
+
+    public void initGenerateMTN() {
+        int MTNsize = MtnSizeRNG();
+
     // 4ez meg berobbantja
     public void generateFullTerrain() {
 
         int MTNsize = randomSizeGenerator();
+
 
         int counter = 0;
         Coordinate base = baseRNG();
