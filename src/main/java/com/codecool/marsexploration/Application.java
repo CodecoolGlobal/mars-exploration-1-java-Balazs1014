@@ -1,6 +1,7 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.Logic.GenerateLandscape;
+import com.codecool.marsexploration.Logic.GenerateWater;
 import com.codecool.marsexploration.Logic.WriteToFile;
 import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
@@ -15,12 +16,14 @@ public class Application {
         GenerateLandscape generateMountains = new GenerateLandscape(mapConfig,map, ElementType.MOUNTAIN);
         GenerateLandscape generatePit = new GenerateLandscape(mapConfig, map,ElementType.PIT);
         for (int i = 0; i < mapConfig.getNoOfMtns() ; i++) {
-            generateMountains.initGenerateMTN();
+            generateMountains.generateFullTerrain();
         }
         for (int i = 0; i < mapConfig.getNoOfPits() ; i++) {
-            generatePit.initGenerateMTN();
+            generatePit.generateFullTerrain();
         }
 
+        GenerateWater water = new GenerateWater(mapConfig, map, map.getMap(), ElementType.WATER);
+        water.generateFullWater();
         WriteToFile toFile = new WriteToFile(mapConfig);
         toFile.saveMapToFile(map.getMap(),"OUR_MAP001");
         toFile.printMapToConsole(map.getMap());
