@@ -51,7 +51,7 @@ public class GenerateWater {
         return shapeList;
     }
 
-    public Coordinate basePit() {
+    private Coordinate basePit() {
         List<Coordinate> pits = getAllPits();
         Random rand = new Random();
         return pits.get(rand.nextInt(pits.size()));

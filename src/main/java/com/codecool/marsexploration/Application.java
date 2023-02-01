@@ -27,6 +27,5 @@ public class Application {
         WriteToFile toFile = new WriteToFile(mapConfig);
         toFile.saveMapToFile(map.getMap(),"OUR_MAP001");
         toFile.printMapToConsole(map.getMap());
-        water.basePit();
     }
 }
