@@ -1,29 +1,29 @@
 package com.codecool.marsexploration.data;
 
-import com.codecool.marsexploration.data.Coordinate;
-import com.codecool.marsexploration.data.Elements;
-
-import javax.lang.model.element.Element;
 import java.util.LinkedHashMap;
 
 public class Map {
-    private final MapConfig config;
-    private  LinkedHashMap <Coordinate, Elements> map = new LinkedHashMap<>();
+    private MapConfig config;
+    private LinkedHashMap <Coordinate, ElementType> map = new LinkedHashMap<>();
+
+    public MapConfig getConfig() {
+        return config;
+    }
 
     public Map(MapConfig config) {
         this.config = config;
         generateMap();
     }
 
-    public LinkedHashMap<Coordinate, Elements> getMap() {
-        return map;
+    public LinkedHashMap<Coordinate, ElementType> getMap() {
+        return this.map;
     }
     //elementet adok vissza mert abbol látom h mi van azon a kordon
-    public Elements getMapCoordinate(Coordinate coordinate) {
+    public ElementType getMapCoordinate(Coordinate coordinate) {
         return map.get(coordinate);
     }
 
-    public void setCoordinateElement(Coordinate coordinate, Elements element) {
+    public void setCoordinateElement(Coordinate coordinate, ElementType element) {
         map.put(coordinate, element);
     }
 
@@ -32,7 +32,7 @@ public class Map {
         int height = this.config.getHeight();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                this.map.put(new Coordinate(x,y), Elements.EMPTY);
+                this.map.put(new Coordinate(x,y), ElementType.EMPTY);
             }
         }
     }
