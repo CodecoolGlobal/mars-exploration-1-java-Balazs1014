@@ -18,7 +18,7 @@ public class WriteToFile {
     public void printMapToConsole(LinkedHashMap<Coordinate, ElementType> map) {
         for (int x = 0; x < this.config.getWidth(); x++) {
             for (int y = 0; y < this.config.getHeight(); y++) {
-                System.out.print(map.get(new Coordinate(x,y)));
+                System.out.print(map.get(new Coordinate(x,y)).getValue());
             }
             System.out.println();
         }
@@ -29,9 +29,11 @@ public class WriteToFile {
 
         for (int i = 0; i < this.config.getHeight(); i++) {
             for (int j = 0; j < this.config.getWidth(); j++) {
-                writer.write(map.get(j).getValue());
+
+                writer.write(map.get(new Coordinate(i,j)).getValue());
+
             }
-            System.lineSeparator();
+            writer.write("\n");
         }
         writer.close();
     }
