@@ -4,16 +4,13 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GenerateLandscape implements EmptyProvider {
+public class GenerateLandscape implements EmptyProvider, RNGProvider {
     MapConfig mapconfig;
     Map map;
-
     ElementType type;
     List<Coordinate> result;
 
@@ -39,8 +36,8 @@ public class GenerateLandscape implements EmptyProvider {
         }
         return result;
     }
-
-    private int randomSizeGenerator() {
+    @Override
+    public int sizeRNG() {
         Random rand = new Random();
         return rand.nextInt(5, 20);
     }
@@ -61,8 +58,8 @@ public class GenerateLandscape implements EmptyProvider {
     }
 
     // 4ez meg berobbantja
-    public void generateFullTerrain() {
-        int MTNsize = randomSizeGenerator();
+    public void initTerrain() {
+        int MTNsize = sizeRNG();
         int counter = 0;
         Coordinate base = baseRNG();
         while (counter < MTNsize) {
@@ -70,6 +67,4 @@ public class GenerateLandscape implements EmptyProvider {
             base = createTerrain(getEmptyCoords(base));
         }
     }
-
-
 }

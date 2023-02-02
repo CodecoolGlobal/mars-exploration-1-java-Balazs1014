@@ -6,10 +6,6 @@ public class Map {
     private MapConfig config;
     private LinkedHashMap <Coordinate, ElementType> map = new LinkedHashMap<>();
 
-    public MapConfig getConfig() {
-        return config;
-    }
-
     public Map(MapConfig config) {
         this.config = config;
         generateMap();

@@ -2,15 +2,12 @@ package com.codecool.marsexploration.data;
 
 import com.codecool.marsexploration.Ui.GetUserInput;
 
-import java.util.Scanner;
-
 public class MapConfig  {
     private final int height;
     private final int width;
     private final int noOfMtns;
     private final int noOfPits;
     private String fileName;
-    GetUserInput input;
 
     public MapConfig(GetUserInput input) {
         this.height = input.getHeight();
@@ -30,7 +27,7 @@ public class MapConfig  {
     public int getWidth() {
         return width;
     }
-
+    //getlogpath nem kell
     public String getLogPath() {
         return Data.LOG_PATH;
     }

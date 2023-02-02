@@ -6,7 +6,7 @@ import com.codecool.marsexploration.data.MapConfig;
 
 import java.io.IOException;
 
-public class FinalMapGeneration  {
+public class MapGenerator {
     public void generateFullTerrainViewOfMars(MapConfig mapConfig) throws IOException {
 
         DinamicNaming name = new DinamicNaming(mapConfig.getFileName());
@@ -19,11 +19,10 @@ public class FinalMapGeneration  {
         GenerateResources mineral = new GenerateResources(mapConfig, map, map.getMap(),ElementType.MINERAL, ElementType.MOUNTAIN);
 
         for (int i = 0; i < mapConfig.getNoOfMtns() ; i++) {
-            generateMountains.generateFullTerrain();
-
+            generateMountains.initTerrain();
         }
         for (int i = 0; i < mapConfig.getNoOfPits() ; i++) {
-            generatePit.generateFullTerrain();
+            generatePit.initTerrain();
         }
 
         water.initResources();
@@ -31,7 +30,4 @@ public class FinalMapGeneration  {
         toFile.saveMapToFile(map.getMap(),generateName);
         toFile.printMapToConsole(map.getMap());
     }
-
-
-
 }

@@ -1,11 +1,9 @@
 package com.codecool.marsexploration.Logic;
 
 import com.codecool.marsexploration.data.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class WriteToFile {
 
@@ -26,12 +24,9 @@ public class WriteToFile {
 
     public void saveMapToFile(LinkedHashMap<Coordinate, ElementType> map, String fileName) throws IOException {
         FileWriter writer = new FileWriter(Data.LOG_PATH + fileName + ".txt");
-
         for (int i = 0; i < this.config.getHeight(); i++) {
             for (int j = 0; j < this.config.getWidth(); j++) {
-
                 writer.write(map.get(new Coordinate(i,j)).getValue());
-
             }
             writer.write("\n");
         }

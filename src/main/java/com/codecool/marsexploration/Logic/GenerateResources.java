@@ -4,17 +4,15 @@ import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
-public class GenerateResources {
+public class GenerateResources implements RNGProvider {
     MapConfig mapconfig;
     Map map;
     ElementType type;
-
     LinkedHashMap<Coordinate, ElementType> mapWithLandscape;
     ElementType parentTerrainElement;
 
@@ -26,8 +24,7 @@ public class GenerateResources {
         this.parentTerrainElement = parentTerrainElement;
     }
 
-    public Coordinate getOneEmptyCoordinate(Coordinate base) {
-
+    public Coordinate getEmptyCoordinate(Coordinate base) {
         for (int x = base.x() - 1; x < base.x() + 1; x++) {
             for (int y = base.y() - 1; y < base.y() + 1; y++) {
                 Coordinate temp = new Coordinate(x, y);
@@ -38,8 +35,8 @@ public class GenerateResources {
         }
         return null;
     }
-
-    private int randomSizeGenerator() {
+    @Override
+    public int sizeRNG() {
         Random rand = new Random();
         return rand.nextInt(2, 9);
     }
@@ -68,14 +65,13 @@ public class GenerateResources {
     }
 
     public void initResources() {
-        int shapeSize = randomSizeGenerator();
+        int shapeSize = sizeRNG();
         int counter = 0;
         while (counter < shapeSize) {
             counter++;
             Coordinate base = baseElement();
-            Coordinate valid = getOneEmptyCoordinate(base);
+            Coordinate valid = getEmptyCoordinate(base);
             setResource(valid);
         }
     }
-
 }
