@@ -4,17 +4,23 @@ import com.codecool.marsexploration.Ui.GetUserInput;
 
 import java.util.Scanner;
 
-public class MapConfig implements GetUserInput {
+public class MapConfig  {
     private final int height;
     private final int width;
     private final int noOfMtns;
     private final int noOfPits;
+    private String fileName;
+    GetUserInput input;
 
-    public MapConfig(int height, int width, int noOfMtns, int noOfPits) {
-        this.height = height;
-        this.width = width;
-        this.noOfMtns = noOfMtns;
-        this.noOfPits = noOfPits;
+    public MapConfig(GetUserInput input) {
+        this.height = input.getHeight();
+        this.width = input.getWidth();
+        this.noOfMtns = input.getNoOfMTN();
+        this.noOfPits = input.getNoOfPit();
+        this.fileName = input.getFileName();
+    }
+    public String getFileName() {
+        return fileName;
     }
 
     public int getHeight() {
@@ -37,10 +43,5 @@ public class MapConfig implements GetUserInput {
         return noOfPits;
     }
 
-    @Override
-    public int promptInput() {
-        System.out.println("How many mountains to generate?");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
-    }
+
 }
