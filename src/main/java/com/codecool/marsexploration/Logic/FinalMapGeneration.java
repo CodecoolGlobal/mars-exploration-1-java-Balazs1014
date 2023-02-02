@@ -17,12 +17,19 @@ public class FinalMapGeneration  {
         WriteToFile toFile = new WriteToFile(mapConfig);
         GenerateLandscape generateMountains = new GenerateLandscape(mapConfig,map, ElementType.MOUNTAIN);
         GenerateLandscape generatePit = new GenerateLandscape(mapConfig, map,ElementType.PIT);
+        GenerateWater water = new GenerateWater(mapConfig, map, map.getMap(),ElementType.WATER, ElementType.PIT);
+        GenerateWater mineral = new GenerateWater(mapConfig, map, map.getMap(),ElementType.MINERAL, ElementType.MOUNTAIN);
+
+
         for (int i = 0; i < mapConfig.getNoOfMtns() ; i++) {
             generateMountains.generateFullTerrain();
+
         }
         for (int i = 0; i < mapConfig.getNoOfPits() ; i++) {
             generatePit.generateFullTerrain();
         }
+        water.generateFullWater();
+        mineral.generateFullWater();
         toFile.saveMapToFile(map.getMap(),generateName);
         toFile.printMapToConsole(map.getMap());
     }

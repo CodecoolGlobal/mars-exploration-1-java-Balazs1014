@@ -15,15 +15,16 @@ public class GenerateLandscape implements EmptyProvider {
     Map map;
 
     ElementType type;
-List<Coordinate> result;
+    List<Coordinate> result;
 
-   public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
+    public GenerateLandscape(MapConfig mapconfig, Map map, ElementType type) {
         this.mapconfig = mapconfig;
         this.map = map;
         this.type = type;
         this.result = new ArrayList<>();
 
     }
+
     //2kezdő pont körül kellenek az üres helyek
     @Override
     public List<Coordinate> getEmptyCoords(Coordinate base) {
@@ -58,6 +59,7 @@ List<Coordinate> result;
         map.setCoordinateElement(first, this.type);
         return first;
     }
+
     // 4ez meg berobbantja
     public void generateFullTerrain() {
         int MTNsize = randomSizeGenerator();
