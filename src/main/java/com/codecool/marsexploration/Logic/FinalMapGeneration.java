@@ -1,12 +1,10 @@
 package com.codecool.marsexploration.Logic;
 
-import com.codecool.marsexploration.Ui.GetUserInput;
 import com.codecool.marsexploration.data.ElementType;
 import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.data.MapConfig;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class FinalMapGeneration  {
     public void generateFullTerrainViewOfMars(MapConfig mapConfig) throws IOException {
@@ -17,9 +15,8 @@ public class FinalMapGeneration  {
         WriteToFile toFile = new WriteToFile(mapConfig);
         GenerateLandscape generateMountains = new GenerateLandscape(mapConfig,map, ElementType.MOUNTAIN);
         GenerateLandscape generatePit = new GenerateLandscape(mapConfig, map,ElementType.PIT);
-        GenerateWater water = new GenerateWater(mapConfig, map, map.getMap(),ElementType.WATER, ElementType.PIT);
-        GenerateWater mineral = new GenerateWater(mapConfig, map, map.getMap(),ElementType.MINERAL, ElementType.MOUNTAIN);
-
+        GenerateResources water = new GenerateResources(mapConfig, map, map.getMap(),ElementType.WATER, ElementType.PIT);
+        GenerateResources mineral = new GenerateResources(mapConfig, map, map.getMap(),ElementType.MINERAL, ElementType.MOUNTAIN);
 
         for (int i = 0; i < mapConfig.getNoOfMtns() ; i++) {
             generateMountains.generateFullTerrain();
@@ -28,8 +25,9 @@ public class FinalMapGeneration  {
         for (int i = 0; i < mapConfig.getNoOfPits() ; i++) {
             generatePit.generateFullTerrain();
         }
-        water.generateFullWater();
-        mineral.generateFullWater();
+
+        water.initResources();
+        mineral.initResources();
         toFile.saveMapToFile(map.getMap(),generateName);
         toFile.printMapToConsole(map.getMap());
     }

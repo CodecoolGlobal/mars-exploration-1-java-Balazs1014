@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
-public class GenerateWater {
+public class GenerateResources {
     MapConfig mapconfig;
     Map map;
     ElementType type;
@@ -18,7 +18,7 @@ public class GenerateWater {
     LinkedHashMap<Coordinate, ElementType> mapWithLandscape;
     ElementType parentTerrainElement;
 
-    public GenerateWater(MapConfig mapconfig, Map map, LinkedHashMap<Coordinate, ElementType> mapWithLandscape, ElementType type, ElementType parentTerrainElement) {
+    public GenerateResources(MapConfig mapconfig, Map map, LinkedHashMap<Coordinate, ElementType> mapWithLandscape, ElementType type, ElementType parentTerrainElement) {
         this.mapconfig = mapconfig;
         this.map = map;
         this.mapWithLandscape = mapWithLandscape;
@@ -44,7 +44,7 @@ public class GenerateWater {
         return rand.nextInt(2, 9);
     }
 
-    private List<Coordinate> getAllPits() {
+    private List<Coordinate> getTerrainElements() {
         List<Coordinate> coordinates = mapWithLandscape.keySet().stream().toList();
         List<ElementType> types = mapWithLandscape.values().stream().toList();
         List<Coordinate> shapeList = new ArrayList<>();
@@ -57,24 +57,24 @@ public class GenerateWater {
         return shapeList;
     }
 
-    private Coordinate basePit() {
-        List<Coordinate> pits = getAllPits();
+    private Coordinate baseElement() {
+        List<Coordinate> pits = getTerrainElements();
         Random rand = new Random();
         return pits.get(rand.nextInt(pits.size()));
     }
 
-    private void createWater(Coordinate emptyCoord) {
+    private void setResource(Coordinate emptyCoord) {
         map.setCoordinateElement(emptyCoord, this.type);
     }
 
-    public void generateFullWater() {
+    public void initResources() {
         int shapeSize = randomSizeGenerator();
         int counter = 0;
         while (counter < shapeSize) {
             counter++;
-            Coordinate base = basePit();
+            Coordinate base = baseElement();
             Coordinate valid = getOneEmptyCoordinate(base);
-            createWater(valid);
+            setResource(valid);
         }
     }
 
