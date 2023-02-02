@@ -24,10 +24,9 @@ public class Map {
     }
 
     private void generateMap() {
-        int width = this.config.getWidth();
-        int height = this.config.getHeight();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        int size = this.config.getSize();
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 this.map.put(new Coordinate(x,y), ElementType.EMPTY);
             }
         }

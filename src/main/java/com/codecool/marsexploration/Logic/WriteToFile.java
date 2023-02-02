@@ -14,8 +14,8 @@ public class WriteToFile {
     }
 
     public void printMapToConsole(LinkedHashMap<Coordinate, ElementType> map) {
-        for (int x = 0; x < this.config.getWidth(); x++) {
-            for (int y = 0; y < this.config.getHeight(); y++) {
+        for (int x = 0; x < this.config.getSize(); x++) {
+            for (int y = 0; y < this.config.getSize(); y++) {
                 System.out.print(map.get(new Coordinate(x,y)).getValue());
             }
             System.out.println();
@@ -24,8 +24,8 @@ public class WriteToFile {
 
     public void saveMapToFile(LinkedHashMap<Coordinate, ElementType> map, String fileName) throws IOException {
         FileWriter writer = new FileWriter(Data.LOG_PATH + fileName + ".txt");
-        for (int i = 0; i < this.config.getHeight(); i++) {
-            for (int j = 0; j < this.config.getWidth(); j++) {
+        for (int i = 0; i < this.config.getSize(); i++) {
+            for (int j = 0; j < this.config.getSize(); j++) {
                 writer.write(map.get(new Coordinate(i,j)).getValue());
             }
             writer.write("\n");
