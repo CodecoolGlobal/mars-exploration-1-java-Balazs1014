@@ -15,4 +15,5 @@ public record Coordinate(int x, int y) {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
 }

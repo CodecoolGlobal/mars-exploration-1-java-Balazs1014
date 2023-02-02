@@ -19,7 +19,6 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         this.map = map;
         this.type = type;
         this.result = new ArrayList<>();
-
     }
 
     //2kezdő pont körül kellenek az üres helyek
@@ -29,6 +28,18 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         for (int x = base.x() - 1; x < base.x() + 1; x++) {
             for (int y = base.y() - 1; y < base.y() + 1; y++) {
                 Coordinate temp = new Coordinate(x, y);
+                if (temp.x() < 0) {
+                    temp = new Coordinate(1,temp.y());
+                }
+                if (temp.x() > this.mapconfig.getSize()) {
+                    temp = new Coordinate(9,temp.y());
+                }
+                if (temp.y() < 0) {
+                    temp = new Coordinate(temp.x(),1);
+                }
+                if (temp.x() > this.mapconfig.getSize()) {
+                    temp = new Coordinate(temp.x(),9);
+                }
                 System.out.println("X : " + temp.x());
                 System.out.println("Y : " + temp.y());
                 if (map.getMapCoordinate(temp).equals(ElementType.EMPTY)) {
@@ -40,21 +51,27 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
     }
     @Override
     public int sizeRNG() {
-        /*Random rand = new Random();
-        return rand.nextInt(5, 20);*/
-        return 5;
+        Random rand = new Random();
+        return rand.nextInt(5, 20);
     }
 
     //1kezdő pointot megadni
     private Coordinate baseRNG() {
         Random rand = new Random();
-        return new Coordinate(rand.nextInt(1,mapconfig.getSize()), rand.nextInt(1,mapconfig.getSize()));
+        return new Coordinate(rand.nextInt(1, mapconfig.getSize()), rand.nextInt(1, mapconfig.getSize()));
     }
 
     //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
     private Coordinate createTerrain(List<Coordinate> emptyCoords) {
         Random random = new Random();
-        int randNumber = random.nextInt(emptyCoords.size());
+        int randNumber =0;
+        try {
+            randNumber = random.nextInt(emptyCoords.size());
+        }catch (IllegalArgumentException e) {
+            System.out.println(emptyCoords);
+            System.out.println(map);
+            throw new RuntimeException("mar megint ez");
+        }
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
         return first;
@@ -65,9 +82,14 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         int MTNsize = sizeRNG();
         int counter = 0;
         Coordinate base = baseRNG();
+        List<Coordinate> emptyCoords = new ArrayList<>();
         while (counter < MTNsize) {
             counter++;
-            base = createTerrain(getEmptyCoords(base));
+            emptyCoords.addAll(getEmptyCoords(base));
+            base = createTerrain(emptyCoords);
+            emptyCoords.remove(base);
         }
+        System.out.println("mtn size "+MTNsize);
+        System.out.println("counter "+counter);
     }
 }

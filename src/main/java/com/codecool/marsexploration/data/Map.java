@@ -31,4 +31,16 @@ public class Map {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+        for (int i = 0; i < config.getSize(); i++) {
+            for (int j = 0; j < config.getSize(); j++) {
+               sb.append(map.get(new Coordinate(i,j)));
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

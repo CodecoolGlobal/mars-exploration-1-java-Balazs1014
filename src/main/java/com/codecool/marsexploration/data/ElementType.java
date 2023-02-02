@@ -16,4 +16,9 @@ public enum ElementType {
     public char getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return ""+value;
+    }
 }
