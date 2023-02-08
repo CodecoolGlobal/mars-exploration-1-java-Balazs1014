@@ -25,23 +25,21 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
     @Override
     public List<Coordinate> getEmptyCoords(Coordinate base) {
         result = new ArrayList<>();
-        for (int x = base.x() - 1; x < base.x() + 1; x++) {
-            for (int y = base.y() - 1; y < base.y() + 1; y++) {
+        for (int x = base.x() - 1; x < base.x() + 2; x++) {
+            for (int y = base.y() - 1; y < base.y() + 2; y++) {
                 Coordinate temp = new Coordinate(x, y);
                 if (temp.x() < 0) {
-                    temp = new Coordinate(1,temp.y());
+                    temp = new Coordinate(0,temp.y());
                 }
-                if (temp.x() > this.mapconfig.getSize()) {
-                    temp = new Coordinate(9,temp.y());
+                if (temp.x() >= this.mapconfig.getSize()) {
+                    temp = new Coordinate(mapconfig.getSize() - 1,temp.y());
                 }
                 if (temp.y() < 0) {
-                    temp = new Coordinate(temp.x(),1);
+                    temp = new Coordinate(temp.x(),0);
                 }
-                if (temp.x() > this.mapconfig.getSize()) {
-                    temp = new Coordinate(temp.x(),9);
+                if (temp.y() >= this.mapconfig.getSize()) {
+                    temp = new Coordinate(temp.x(),mapconfig.getSize() - 1);
                 }
-                System.out.println("X : " + temp.x());
-                System.out.println("Y : " + temp.y());
                 if (map.getMapCoordinate(temp).equals(ElementType.EMPTY)) {
                     this.result.add(temp);
                 }
@@ -70,7 +68,7 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         }catch (IllegalArgumentException e) {
             System.out.println(emptyCoords);
             System.out.println(map);
-            throw new RuntimeException("mar megint ez");
+            throw new RuntimeException("kiment a bound-ból");
         }
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
@@ -89,7 +87,5 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
             base = createTerrain(emptyCoords);
             emptyCoords.remove(base);
         }
-        System.out.println("mtn size "+MTNsize);
-        System.out.println("counter "+counter);
     }
 }

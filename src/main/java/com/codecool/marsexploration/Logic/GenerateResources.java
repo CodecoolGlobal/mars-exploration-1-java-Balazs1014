@@ -37,10 +37,8 @@ public class GenerateResources implements RNGProvider {
     }
     @Override
     public int sizeRNG() {
-        /*Random rand = new Random();
-        return rand.nextInt(2, 9);/*
-         */
-        return 5;
+        Random rand = new Random();
+        return rand.nextInt(2, 9);
     }
 
     private List<Coordinate> getTerrainElements() {
