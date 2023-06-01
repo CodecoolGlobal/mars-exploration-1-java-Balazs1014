@@ -6,7 +6,7 @@ public class MapConfig  {
     private final int size;
     private final int noOfMtns;
     private final int noOfPits;
-    private String fileName;
+    private final String fileName;
 
     public MapConfig(GetUserInput input) {
         this.size = input.getSize();
@@ -22,10 +22,6 @@ public class MapConfig  {
     public String getFileName() {
         return fileName;
     }
-    //getlogpath nem kell
-    public String getLogPath() {
-        return Data.LOG_PATH;
-    }
 
     public int getNoOfMtns() {
         return noOfMtns;
@@ -34,6 +30,4 @@ public class MapConfig  {
     public int getNoOfPits() {
         return noOfPits;
     }
-
-
 }

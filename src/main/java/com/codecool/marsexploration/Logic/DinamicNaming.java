@@ -17,6 +17,4 @@ public class DinamicNaming {
         generatedName = fileName+ filenamenumber ;
         return generatedName;
     }
-
-
 }

@@ -3,8 +3,8 @@ package com.codecool.marsexploration.data;
 import java.util.LinkedHashMap;
 
 public class Map {
-    private MapConfig config;
-    private LinkedHashMap <Coordinate, ElementType> map = new LinkedHashMap<>();
+    private final MapConfig config;
+    private final LinkedHashMap <Coordinate, ElementType> map = new LinkedHashMap<>();
 
     public Map(MapConfig config) {
         this.config = config;
@@ -14,7 +14,7 @@ public class Map {
     public LinkedHashMap<Coordinate, ElementType> getMap() {
         return this.map;
     }
-    //elementet adok vissza mert abbol látom h mi van azon a kordon
+
     public ElementType getMapCoordinate(Coordinate coordinate) {
         return map.get(coordinate);
     }

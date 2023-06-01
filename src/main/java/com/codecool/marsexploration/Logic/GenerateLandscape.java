@@ -21,7 +21,6 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         this.result = new ArrayList<>();
     }
 
-    //2kezdő pont körül kellenek az üres helyek
     @Override
     public List<Coordinate> getEmptyCoords(Coordinate base) {
         result = new ArrayList<>();
@@ -53,13 +52,11 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         return rand.nextInt(5, 20);
     }
 
-    //1kezdő pointot megadni
     private Coordinate baseRNG() {
         Random rand = new Random();
         return new Coordinate(rand.nextInt(1, mapconfig.getSize()), rand.nextInt(1, mapconfig.getSize()));
     }
 
-    //3 resultba benne a random base körüli üres helyek [üreskord, üreskord...], azért adom a firstot vissza mert az lesz az uj base, triuggereli a get emptyt és igy dinamikus nem jo a get0
     private Coordinate createTerrain(List<Coordinate> emptyCoords) {
         Random random = new Random();
         int randNumber =0;
@@ -68,14 +65,13 @@ public class GenerateLandscape implements EmptyProvider, RNGProvider {
         }catch (IllegalArgumentException e) {
             System.out.println(emptyCoords);
             System.out.println(map);
-            throw new RuntimeException("kiment a bound-ból");
+            throw new RuntimeException("out of bounds");
         }
         Coordinate first = emptyCoords.get(randNumber);
         map.setCoordinateElement(first, this.type);
         return first;
     }
 
-    // 4ez meg berobbantja
     public void initTerrain() {
         int MTNsize = sizeRNG();
         int counter = 0;

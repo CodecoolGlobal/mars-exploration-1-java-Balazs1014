@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 public class WriteToFile {
-
     MapConfig config;
-
     public WriteToFile(MapConfig config) {
         this.config = config;
     }
